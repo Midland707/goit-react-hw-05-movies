@@ -1,6 +1,5 @@
 // import { useEffect } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import MovieDetails from 'components/MovieDetails/MovieDetails';
+import { Link } from 'react-router-dom';
 // import getImages from '../service/moviesApi';
 
 const Home = () => {
@@ -15,10 +14,6 @@ const Home = () => {
           <Link to="/movies/:movieId">MovieDetails</Link>
         </li>
       </ul>
-      <Routes>
-        <Route path="/movies/:movieId" element={<MovieDetails />} />;
-        <Route path="*" element={<Home />} />
-      </Routes>
     </div>
   );
 };

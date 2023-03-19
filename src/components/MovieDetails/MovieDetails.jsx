@@ -1,12 +1,12 @@
-import { Routes, Route, NavLink } from 'react-router-dom';
-import Cast from 'components/Cast/Cast';
-import Reviews from 'components/Reviews/Reviews';
-import Home from 'pages/Home';
+import { NavLink, Outlet } from 'react-router-dom';
 
 const MovieDetails = () => {
   return (
     <div>
       <ul>
+        <li>
+          <NavLink to="/">Home</NavLink>
+        </li>
         <li>
           <NavLink to="/movies/:movieId/cast">Cast</NavLink>
         </li>
@@ -14,12 +14,7 @@ const MovieDetails = () => {
           <NavLink to="/movies/:movieId/reviews">Reviews</NavLink>
         </li>
       </ul>
-
-      <Routes>
-        <Route path="/movies/:movieId/cast" element={<Cast />} />
-        <Route path="/movies/:movieId/reviews" element={<Reviews />} />
-        <Route path="*" element={<Home />} />
-      </Routes>
+      <Outlet />
     </div>
   );
 };
