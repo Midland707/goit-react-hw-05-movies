@@ -1,5 +1,6 @@
 // import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import MovieList from 'components/MovieList/MovieList';
 // import getImages from '../service/moviesApi';
 
 const Home = () => {
@@ -9,11 +10,7 @@ const Home = () => {
   return (
     <div>
       Home
-      <ul>
-        <li>
-          <Link to="/movies/:movieId">MovieDetails</Link>
-        </li>
-      </ul>
+      <MovieList />
     </div>
   );
 };
