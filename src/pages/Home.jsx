@@ -1,7 +1,11 @@
 // import { useEffect } from 'react';
 // import { Link } from 'react-router-dom';
-import MovieList from 'components/MovieList/MovieList';
+import { lazy } from 'react';
+
+// import MovieList from 'components/MovieList/MovieList';
 // import getImages from '../service/moviesApi';
+
+const MovieList = lazy(() => import('../components/MovieList/MovieList'));
 
 const Home = () => {
   //     useEffect(() => {
@@ -10,7 +14,7 @@ const Home = () => {
   return (
     <div>
       Home
-      <MovieList />
+      {/* <MovieList /> */}
     </div>
   );
 };

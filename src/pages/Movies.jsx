@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import MovieList from 'components/MovieList/MovieList';
+import { useState, lazy } from 'react';
+// import MovieList from 'components/MovieList/MovieList';
+const MovieList = lazy(() => import('../components/MovieList/MovieList'));
 
 const Movies = () => {
   const [searchWord, setSearchWord] = useState('');
@@ -35,7 +36,7 @@ const Movies = () => {
         />
         <button type="submit">Search</button>
       </form>
-      <MovieList />
+      {/* <MovieList /> */}
     </div>
   );
 };
