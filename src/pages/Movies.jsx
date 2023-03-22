@@ -1,16 +1,16 @@
 import axios from 'axios';
 import { useState, lazy, useEffect } from 'react';
-import { useSearchParams, useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 const MovieList = lazy(() => import('../components/MovieList/MovieList'));
 
 const Movies = () => {
   const [searchWord, setSearchWord] = useState('');
   const [dataSearch, setDataSearch] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const { query } = useParams();
+  const URLquery = searchParams.get('query');
 
   useEffect(() => {
-    console.log('query = ', query);
+    if (URLquery) runQuery(URLquery);
   }, []);
 
   const onChangeHandel = event => {
@@ -44,7 +44,6 @@ const Movies = () => {
       alert('Ведіть назву фільму');
       return;
     }
-    // search query=King+Leon https://api.themoviedb.org/3/search/movie?api_key=6746b4dbb69b720741ecbdc7655d3557&query=King+Leon
     runQuery(searchWord);
     updateQueryString();
     setSearchWord('');
