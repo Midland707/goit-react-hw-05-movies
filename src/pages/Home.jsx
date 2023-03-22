@@ -3,7 +3,6 @@
 import { lazy, Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
-// import MovieList from 'components/MovieList/MovieList';
 // import getImages from '../service/moviesApi';
 
 const MovieList = lazy(() => import('../components/MovieList/MovieList'));
@@ -15,7 +14,7 @@ const Home = () => {
   return (
     <div>
       Home
-          <ul>
+      <ul>
         <li>
           <NavLink to="/">Home</NavLink>
         </li>

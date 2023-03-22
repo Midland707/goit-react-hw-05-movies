@@ -6,7 +6,7 @@ const MovieDetails = () => {
     <div>
       <ul>
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/">Back to Home</NavLink>
         </li>
         <li>
           <NavLink to="/movies/:movieId/cast">Cast</NavLink>
