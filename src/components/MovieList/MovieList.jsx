@@ -1,12 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const MovieList = ({ data }) => {
+  const location = useLocation();
   return (
     <div>
       <ul>
         {data.map(movie => (
           <li key={movie.id}>
-            <Link to={`${movie.id}`}>{movie.original_title}</Link>
+            <Link to={`${movie.id}`} state={{ from: location }}>
+              {movie.original_title}
+            </Link>
           </li>
         ))}
       </ul>
