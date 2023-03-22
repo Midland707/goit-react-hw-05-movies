@@ -1,31 +1,29 @@
-// import { useEffect } from 'react';
-// import { Link } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-
+import axios from 'axios';
+import { lazy, useEffect, useState } from 'react';
 // import getImages from '../service/moviesApi';
 
 const MovieList = lazy(() => import('../components/MovieList/MovieList'));
 
 const Home = () => {
-  //     useEffect(() => {
-  //       // HTTP query
-  //   }, []);
+  axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
+  const apiKey = '6746b4dbb69b720741ecbdc7655d3557';
+  const typeQuery = 'trending';
+  const media_type = 'movie';
+  const time_window = 'day';
+  const [dataQuery, setDataQuery] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${typeQuery}/${media_type}/${time_window}?api_key=${apiKey}`)
+      .then(res => {
+        const dataArr = res.data;
+        setDataQuery(dataArr.results);
+      });
+  }, []);
   return (
     <div>
-      Home
-      <ul>
-        <li>
-          <NavLink to="/">Home</NavLink>
-        </li>
-        <li>
-          <NavLink to="/movies">Movies</NavLink>
-        </li>
-      </ul>
-      <MovieList />
-      <Suspense fallback={<div>Loading subpage...</div>}>
-        <Outlet />
-      </Suspense>
+      <h2>Trending today</h2>
+      {dataQuery && <MovieList data={dataQuery} />}
     </div>
   );
 };

@@ -1,15 +1,13 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://pixabay.com/api/';
-const key = '32874218-f955783fbc8df841e2f172dbc';
-// API Key: 6746b4dbb69b720741ecbdc7655d3557
-axios.defaults.params = {
-  orientation: 'horizontal',
-  //   orientation: 'landscape',
-  image_type: 'photo',
-  safesearch: 'true',
-  per_page: 12,
-};
+axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
+const key = '6746b4dbb69b720741ecbdc7655d3557';
+// axios.defaults.params = {
+//   orientation: 'horizontal',
+//   image_type: 'photo',
+//   safesearch: 'true',
+//   per_page: 12,
+// };
 
 export const getImages = async (query, page) => {
   const { data } = await axios.get(`?key=${key}&q=${query}&page=${page}`);
