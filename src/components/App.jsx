@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react';
-import { NavLink, Routes, Route } from 'react-router-dom';
+import { lazy} from 'react';
+import { Routes, Route } from 'react-router-dom';
 // import Home from 'pages/Home';
 // import Movies from 'pages/Movies';
 // import MovieDetails from 'components/MovieDetails/MovieDetails';
@@ -24,21 +24,15 @@ export const App = () => {
     //   color: '#010101',
     // }}
     >
-      <ul>
-        <li>
-          <NavLink to="/">Home</NavLink>
-        </li>
-        <li>
-          <NavLink to="/movies">Movies</NavLink>
-        </li>
-      </ul>
+
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />}>
         <Route path="/movies" element={<Movies />} />
         <Route path="/movies/:movieId" element={<MovieDetails />}>
           <Route path="cast" element={<Cast />} />
           <Route path="reviews" element={<Reviews />} />
         </Route>
+</Route>
         <Route path="*" element={<Home />} />
       </Routes>
     </div>

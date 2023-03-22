@@ -1,6 +1,7 @@
 // import { useEffect } from 'react';
 // import { Link } from 'react-router-dom';
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
 
 // import MovieList from 'components/MovieList/MovieList';
 // import getImages from '../service/moviesApi';
@@ -14,7 +15,18 @@ const Home = () => {
   return (
     <div>
       Home
-      {/* <MovieList /> */}
+          <ul>
+        <li>
+          <NavLink to="/">Home</NavLink>
+        </li>
+        <li>
+          <NavLink to="/movies">Movies</NavLink>
+        </li>
+      </ul>
+      <MovieList />
+      <Suspense fallback={<div>Loading subpage...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };

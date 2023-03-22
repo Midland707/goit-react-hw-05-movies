@@ -36,7 +36,7 @@ const Movies = () => {
         />
         <button type="submit">Search</button>
       </form>
-      {/* <MovieList /> */}
+      <MovieList />
     </div>
   );
 };
