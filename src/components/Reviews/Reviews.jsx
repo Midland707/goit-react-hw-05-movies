@@ -25,10 +25,9 @@ const Reviews = () => {
     }
   };
 
-  const imgURL = 'https://image.tmdb.org/t/p/original';
   return (
     <div>
-      {reviewsCard && (
+      {reviewsCard ? (
         <ul>
           {reviewsCard.map(review => (
             <li key={review.id}>
@@ -37,6 +36,8 @@ const Reviews = () => {
             </li>
           ))}
         </ul>
+      ) : (
+        <span>We don't have any reviews for this movie</span>
       )}
     </div>
   );

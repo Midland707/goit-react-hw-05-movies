@@ -28,7 +28,7 @@ const Cast = () => {
   const imgURL = 'https://image.tmdb.org/t/p/original';
   return (
     <div>
-      {castsCard && (
+      {castsCard ? (
         <ul>
           {castsCard.map(cast => (
             <li key={cast.id}>
@@ -41,6 +41,8 @@ const Cast = () => {
             </li>
           ))}
         </ul>
+      ) : (
+        <span>We don't have any cast for this movie</span>
       )}
     </div>
   );
