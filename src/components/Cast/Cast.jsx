@@ -1,7 +1,49 @@
-const { useParams } = require('react-router-dom');
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
 const Cast = () => {
+  const [castsCard, setCastsCard] = useState(null);
   const { movieId } = useParams();
-  return <div>Cast {movieId}</div>;
+
+  useEffect(() => {
+    runQuery();
+  }, []);
+  //cast with id=343611 https://api.themoviedb.org/3/movie/343611/credits?api_key=6746b4dbb69b720741ecbdc7655d3557
+  const runQuery = () => {
+    if (movieId) {
+      axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
+      const apiKey = '6746b4dbb69b720741ecbdc7655d3557';
+      const typeQuery = 'movie';
+      const subType = 'credits';
+      axios
+        .get(`${typeQuery}/${movieId}/${subType}?api_key=${apiKey}`)
+        .then(res => {
+          const dataArr = res.data;
+          setCastsCard(dataArr.cast);
+        });
+    }
+  };
+
+  const imgURL = 'https://image.tmdb.org/t/p/original';
+  return (
+    <div>
+      {castsCard && (
+        <ul>
+          {castsCard.map(cast => (
+            <li key={cast.id}>
+              <img
+                src={`${imgURL}${cast.profile_path}`}
+                alt={`${cast.original_name}`}
+              />
+              <span>{cast.original_name}</span>
+              <span>Character {cast.character}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 };
 
 export default Cast;
