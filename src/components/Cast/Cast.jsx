@@ -7,10 +7,6 @@ const Cast = () => {
   const { movieId } = useParams();
 
   useEffect(() => {
-    runQuery();
-  }, []);
-
-  const runQuery = () => {
     if (movieId) {
       axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
       const apiKey = '6746b4dbb69b720741ecbdc7655d3557';
@@ -23,7 +19,7 @@ const Cast = () => {
           setCastsCard(dataArr.cast);
         });
     }
-  };
+  }, [movieId]);
 
   const imgURL = 'https://image.tmdb.org/t/p/original';
   return (

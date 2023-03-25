@@ -11,10 +11,6 @@ const MovieDetails = () => {
   const imgURL = 'https://image.tmdb.org/t/p/original';
 
   useEffect(() => {
-    runQuery();
-  }, []);
-
-  const runQuery = () => {
     if (movieId) {
       axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
       const apiKey = '6746b4dbb69b720741ecbdc7655d3557';
@@ -24,7 +20,7 @@ const MovieDetails = () => {
         setDataCard(dataArr);
       });
     }
-  };
+  }, [movieId]);
 
   const getGenres = () => {
     if (dataCard) {
