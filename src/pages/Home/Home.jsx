@@ -1,6 +1,15 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import {
+  HomeWrap,
+  HomeTitle,
+  HomeMoviesList,
+  HomeMoviesItem,
+  HomeMoviesItemTitle,
+  HomeMoviesItemImg,
+  StyledLink,
+} from './Home.styled';
 // import getImages from '../service/moviesApi';
 
 const Home = () => {
@@ -28,19 +37,32 @@ const Home = () => {
       });
   };
 
+  const imgURL = 'https://image.tmdb.org/t/p/original';
+
   return (
-    <div>
-      <h2>Trending today</h2>
-      <ul>
+    <HomeWrap>
+      <HomeTitle>Trending today</HomeTitle>
+      <HomeMoviesList>
         {dataQuery.map(movie => (
-          <li key={movie.id}>
-            <Link to={`movies/${movie.id}`} state={{ from: location }}>
-              {movie.original_title}
-            </Link>
-          </li>
+          <HomeMoviesItem key={movie.id}>
+            <StyledLink to={`movies/${movie.id}`} state={{ from: location }}>
+              <HomeMoviesItemTitle>{movie.original_title}</HomeMoviesItemTitle>
+              {movie.poster_path ? (
+                <HomeMoviesItemImg
+                  src={`${imgURL}${movie.poster_path}`}
+                  alt={`${movie.original_title}`}
+                />
+              ) : (
+                <HomeMoviesItemImg
+                  src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
+                  alt="no image"
+                />
+              )}
+            </StyledLink>
+          </HomeMoviesItem>
         ))}
-      </ul>
-    </div>
+      </HomeMoviesList>
+    </HomeWrap>
   );
 };
 

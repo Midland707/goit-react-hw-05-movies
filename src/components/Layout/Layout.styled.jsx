@@ -1,14 +1,17 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-export const Wrapper = styled.section`
+export const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 16px;
   padding: 24px;
+  background-color: #c6eec6;
 `;
 
 export const NavMenuList = styled.ul`
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   gap: 10px;
 `;

@@ -26,10 +26,11 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   h1,
-h2,
-h3,
-h4,
-h5 p {
+  h2,
+  h3,
+  h4,
+  h5,
+  p {
   margin-top: 0;
   margin-bottom: 0;
 }

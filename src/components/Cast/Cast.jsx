@@ -31,10 +31,15 @@ const Cast = () => {
         <ul>
           {castsCard.map(cast => (
             <li key={cast.id}>
-              {cast.profile_path && (
+              {cast.profile_path ? (
                 <img
                   src={`${imgURL}${cast.profile_path}`}
                   alt={`${cast.original_name}`}
+                />
+              ) : (
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
+                  alt="no image"
                 />
               )}
               <span>{cast.original_name}</span>
