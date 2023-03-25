@@ -25,9 +25,24 @@ export const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
+  h1,
+h2,
+h3,
+h4,
+h5 p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
   img {
     display: block;
     max-width: 100%;
     height: auto;
   }
+
+  ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 `;

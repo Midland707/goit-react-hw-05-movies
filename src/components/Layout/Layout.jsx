@@ -1,17 +1,24 @@
 import { Suspense } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
+import {
+  Wrapper,
+  NavMenuList,
+  NavMenuItem,
+  StyledNavLink,
+} from './Layout.styled';
+
 const Layout = () => {
   return (
-    <div>
-      <ul>
-        <li>
-          <NavLink to="/">Home</NavLink>
-        </li>
-        <li>
-          <NavLink to="/movies">Movies</NavLink>
-        </li>
-      </ul>
+    <Wrapper>
+      <NavMenuList>
+        <NavMenuItem>
+          <StyledNavLink to="/">Home</StyledNavLink>
+        </NavMenuItem>
+        <NavMenuItem>
+          <StyledNavLink to="/movies">Movies</StyledNavLink>
+        </NavMenuItem>
+      </NavMenuList>
       <Suspense
         fallback={
           <div>
@@ -22,7 +29,7 @@ const Layout = () => {
       >
         <Outlet />
       </Suspense>
-    </div>
+    </Wrapper>
   );
 };
 
