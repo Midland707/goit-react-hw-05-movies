@@ -3,13 +3,13 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const Reviews = () => {
-  const [reviewsCard, setReviewsCard] = useState(null);
+  const [reviewsCard, setReviewsCard] = useState([]);
   const { movieId } = useParams();
 
   useEffect(() => {
     runQuery();
   }, []);
-  // https://api.themoviedb.org/3/movie/272/reviews?api_key=6746b4dbb69b720741ecbdc7655d3557
+
   const runQuery = () => {
     if (movieId) {
       axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
@@ -27,7 +27,7 @@ const Reviews = () => {
 
   return (
     <div>
-      {reviewsCard ? (
+      {reviewsCard.length ? (
         <ul>
           {reviewsCard.map(review => (
             <li key={review.id}>

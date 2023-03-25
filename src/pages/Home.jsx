@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { lazy, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 // import getImages from '../service/moviesApi';
-
-const MovieList = lazy(() => import('../components/MovieList/MovieList'));
 
 const Home = () => {
   const [dataQuery, setDataQuery] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     runQuery();
@@ -28,7 +28,15 @@ const Home = () => {
   return (
     <div>
       <h2>Trending today</h2>
-      {dataQuery && <MovieList data={dataQuery} />}
+      <ul>
+        {dataQuery.map(movie => (
+          <li key={movie.id}>
+            <Link to={`movies/${movie.id}`} state={{ from: location }}>
+              {movie.original_title}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

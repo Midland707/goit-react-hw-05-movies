@@ -3,13 +3,13 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const Cast = () => {
-  const [castsCard, setCastsCard] = useState(null);
+  const [castsCard, setCastsCard] = useState([]);
   const { movieId } = useParams();
 
   useEffect(() => {
     runQuery();
   }, []);
-  //cast with id=343611 https://api.themoviedb.org/3/movie/343611/credits?api_key=6746b4dbb69b720741ecbdc7655d3557
+
   const runQuery = () => {
     if (movieId) {
       axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
@@ -28,7 +28,7 @@ const Cast = () => {
   const imgURL = 'https://image.tmdb.org/t/p/original';
   return (
     <div>
-      {castsCard ? (
+      {castsCard.length ? (
         <ul>
           {castsCard.map(cast => (
             <li key={cast.id}>

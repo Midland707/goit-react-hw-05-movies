@@ -1,17 +1,17 @@
 import axios from 'axios';
-import { useState, lazy, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-const MovieList = lazy(() => import('../components/MovieList/MovieList'));
+import { useState, useEffect } from 'react';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
   const [searchWord, setSearchWord] = useState('');
   const [dataSearch, setDataSearch] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
   const URLquery = searchParams.get('query');
 
   useEffect(() => {
     if (URLquery) runQuery(URLquery);
-  }, []);
+  }, [URLquery]);
 
   const onChangeHandel = event => {
     const { value } = event.currentTarget;
@@ -65,7 +65,15 @@ const Movies = () => {
         />
         <button type="submit">Search</button>
       </form>
-      <MovieList data={dataSearch} />
+      <ul>
+        {dataSearch.map(movie => (
+          <li key={movie.id}>
+            <Link to={`${movie.id}`} state={{ from: location }}>
+              {movie.original_title}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
