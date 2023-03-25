@@ -1,6 +1,17 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import {
+  MoviesWrap,
+  MoviesForm,
+  MoviesFormInput,
+  MoviesFormBtn,
+  MoviesList,
+  MoviesItem,
+  MoviesItemTitle,
+  MoviesItemImg,
+  StyledLink,
+} from './Movies.styled';
 
 const Movies = () => {
   const [searchWord, setSearchWord] = useState('');
@@ -52,11 +63,11 @@ const Movies = () => {
     setSearchWord('');
   };
 
+  const imgURL = 'https://image.tmdb.org/t/p/original';
   return (
-    <div onSubmit={onSubmitForm}>
-      Movies
-      <form>
-        <input
+    <MoviesWrap>
+      <MoviesForm onSubmit={onSubmitForm}>
+        <MoviesFormInput
           type="text"
           name="searchWord"
           autoComplete="off"
@@ -66,18 +77,32 @@ const Movies = () => {
           required
           onChange={onChangeHandel}
         />
-        <button type="submit">Search</button>
-      </form>
-      <ul>
+        <MoviesFormBtn type="submit">Search</MoviesFormBtn>
+      </MoviesForm>
+      <MoviesList>
         {dataSearch.map(movie => (
-          <li key={movie.id}>
-            <Link to={`${movie.id}`} state={{ from: location }}>
+          <MoviesItem key={movie.id}>
+            <MoviesItemTitle>
               {movie.original_title}
-            </Link>
-          </li>
+              {` (${movie.release_date.slice(0, 4)})`}
+            </MoviesItemTitle>
+            <StyledLink to={`${movie.id}`} state={{ from: location }}>
+              {movie.poster_path ? (
+                <MoviesItemImg
+                  src={`${imgURL}${movie.poster_path}`}
+                  alt={`${movie.original_title}`}
+                />
+              ) : (
+                <MoviesItemImg
+                  src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
+                  alt="no image"
+                />
+              )}
+            </StyledLink>
+          </MoviesItem>
         ))}
-      </ul>
-    </div>
+      </MoviesList>
+    </MoviesWrap>
   );
 };
 

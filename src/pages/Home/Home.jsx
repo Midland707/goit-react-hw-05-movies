@@ -38,7 +38,6 @@ const Home = () => {
   };
 
   const imgURL = 'https://image.tmdb.org/t/p/original';
-
   return (
     <HomeWrap>
       <HomeTitle>Trending today</HomeTitle>
@@ -46,7 +45,10 @@ const Home = () => {
         {dataQuery.map(movie => (
           <HomeMoviesItem key={movie.id}>
             <StyledLink to={`movies/${movie.id}`} state={{ from: location }}>
-              <HomeMoviesItemTitle>{movie.original_title}</HomeMoviesItemTitle>
+              <HomeMoviesItemTitle>
+                {movie.original_title}
+                {` (${movie.release_date.slice(0, 4)})`}
+              </HomeMoviesItemTitle>
               {movie.poster_path ? (
                 <HomeMoviesItemImg
                   src={`${imgURL}${movie.poster_path}`}
