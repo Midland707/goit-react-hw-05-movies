@@ -35,6 +35,9 @@ const Movies = () => {
       .then(res => {
         const dataArr = res.data;
         setDataSearch(dataArr.results);
+      })
+      .catch(error => {
+        console.error(error.message);
       });
   };
 

@@ -17,6 +17,9 @@ const Reviews = () => {
         .then(res => {
           const dataArr = res.data;
           setReviewsCard(dataArr.results);
+        })
+        .catch(error => {
+          console.error(error.message);
         });
     }
   }, [movieId]);

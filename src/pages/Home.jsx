@@ -22,6 +22,9 @@ const Home = () => {
       .then(res => {
         const dataArr = res.data;
         setDataQuery(dataArr.results);
+      })
+      .catch(error => {
+        console.error(error.message);
       });
   };
 

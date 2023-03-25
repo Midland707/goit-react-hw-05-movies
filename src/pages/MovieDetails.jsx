@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Suspense, useState, useRef, useEffect } from 'react';
 import { useLocation, NavLink, Outlet, useParams } from 'react-router-dom';
+import { Loader } from 'components/Loader/Loader';
 
 const MovieDetails = () => {
   const location = useLocation();
@@ -15,10 +16,15 @@ const MovieDetails = () => {
       axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
       const apiKey = '6746b4dbb69b720741ecbdc7655d3557';
       const typeQuery = 'movie';
-      axios.get(`${typeQuery}/${movieId}?api_key=${apiKey}`).then(res => {
-        const dataArr = res.data;
-        setDataCard(dataArr);
-      });
+      axios
+        .get(`${typeQuery}/${movieId}?api_key=${apiKey}`)
+        .then(res => {
+          const dataArr = res.data;
+          setDataCard(dataArr);
+        })
+        .catch(error => {
+          console.error(error.message);
+        });
     }
   }, [movieId]);
 
@@ -52,7 +58,14 @@ const MovieDetails = () => {
           <NavLink to={`/movies/${movieId}/reviews`}>Reviews</NavLink>
         </li>
       </ul>
-      <Suspense fallback={<div>Loading subpage...</div>}>
+      <Suspense
+        fallback={
+          <div>
+            <Loader />
+            Loading subpage...
+          </div>
+        }
+      >
         <Outlet />
       </Suspense>
     </div>

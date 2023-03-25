@@ -17,6 +17,9 @@ const Cast = () => {
         .then(res => {
           const dataArr = res.data;
           setCastsCard(dataArr.cast);
+        })
+        .catch(error => {
+          console.error(error.message);
         });
     }
   }, [movieId]);
@@ -28,10 +31,12 @@ const Cast = () => {
         <ul>
           {castsCard.map(cast => (
             <li key={cast.id}>
-              <img
-                src={`${imgURL}${cast.profile_path}`}
-                alt={`${cast.original_name}`}
-              />
+              {cast.profile_path && (
+                <img
+                  src={`${imgURL}${cast.profile_path}`}
+                  alt={`${cast.original_name}`}
+                />
+              )}
               <span>{cast.original_name}</span>
               <span>Character {cast.character}</span>
             </li>
