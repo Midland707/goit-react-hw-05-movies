@@ -1,7 +1,7 @@
-import axios from 'axios';
 import { Suspense, useState, useRef, useEffect } from 'react';
 import { useLocation, Outlet, useParams } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
+import { getMovie } from '../../service/moviesApi';
 import {
   MovieDetailsWrap,
   MovieDetailsGoBack,
@@ -29,11 +29,7 @@ const MovieDetails = () => {
 
   useEffect(() => {
     if (movieId) {
-      axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
-      const apiKey = '6746b4dbb69b720741ecbdc7655d3557';
-      const typeQuery = 'movie';
-      axios
-        .get(`${typeQuery}/${movieId}?api_key=${apiKey}`)
+      getMovie(movieId)
         .then(res => {
           const dataArr = res.data;
           setDataCard(dataArr);
@@ -46,11 +42,9 @@ const MovieDetails = () => {
 
   const getGenres = () => {
     if (dataCard) {
-      const a = [];
-      dataCard.genres.forEach(function (obj) {
-        a.push(obj.name);
-      });
-      return a.toString();
+      const arr = [];
+      dataCard.genres.forEach(obj => arr.push(obj.name));
+      return arr.toString();
     }
   };
   return (

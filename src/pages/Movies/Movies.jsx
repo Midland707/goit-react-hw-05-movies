@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
+import { getSeachMovies } from '../../service/moviesApi';
 import {
   MoviesWrap,
   MoviesForm,
@@ -37,15 +37,9 @@ const Movies = () => {
   };
 
   const runQuery = queryWord => {
-    axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
-    const apiKey = '6746b4dbb69b720741ecbdc7655d3557';
-    const typeQuery = 'search';
-    const media_type = 'movie';
-    axios
-      .get(`${typeQuery}/${media_type}?api_key=${apiKey}&query=${queryWord}`)
+    getSeachMovies(queryWord)
       .then(res => {
-        const dataArr = res.data;
-        setDataSearch(dataArr.results);
+        setDataSearch(res.data.results);
       })
       .catch(error => {
         console.error(error.message);

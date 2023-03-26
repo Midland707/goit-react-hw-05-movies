@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { getMovieInfo } from '../../service/moviesApi';
 import {
   MovieCastWrap,
   MovieCastList,
@@ -18,15 +18,9 @@ const Cast = () => {
 
   useEffect(() => {
     if (movieId) {
-      axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
-      const apiKey = '6746b4dbb69b720741ecbdc7655d3557';
-      const typeQuery = 'movie';
-      const subType = 'credits';
-      axios
-        .get(`${typeQuery}/${movieId}/${subType}?api_key=${apiKey}`)
+      getMovieInfo(movieId, 'credits')
         .then(res => {
-          const dataArr = res.data;
-          setCastsCard(dataArr.cast);
+          setCastsCard(res.data.cast);
         })
         .catch(error => {
           console.error(error.message);

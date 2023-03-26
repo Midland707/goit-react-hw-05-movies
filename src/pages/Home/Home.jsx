@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { getTrendMovies } from '../../service/moviesApi';
 import {
   HomeWrap,
   HomeTitle,
@@ -10,32 +10,20 @@ import {
   HomeMoviesItemImg,
   StyledLink,
 } from './Home.styled';
-// import getImages from '../service/moviesApi';
 
 const Home = () => {
   const [dataQuery, setDataQuery] = useState([]);
   const location = useLocation();
 
   useEffect(() => {
-    runQuery();
-  }, []);
-
-  const runQuery = () => {
-    axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
-    const apiKey = '6746b4dbb69b720741ecbdc7655d3557';
-    const typeQuery = 'trending';
-    const media_type = 'movie';
-    const time_window = 'day';
-    axios
-      .get(`${typeQuery}/${media_type}/${time_window}?api_key=${apiKey}`)
+    getTrendMovies()
       .then(res => {
-        const dataArr = res.data;
-        setDataQuery(dataArr.results);
+        setDataQuery(res.data.results);
       })
       .catch(error => {
         console.error(error.message);
       });
-  };
+  }, []);
 
   const imgURL = 'https://image.tmdb.org/t/p/original';
   return (

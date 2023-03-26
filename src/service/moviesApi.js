@@ -1,25 +1,20 @@
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
-const key = '6746b4dbb69b720741ecbdc7655d3557';
-// axios.defaults.params = {
-//   orientation: 'horizontal',
-//   image_type: 'photo',
-//   safesearch: 'true',
-//   per_page: 12,
-// };
+const apiKey = '6746b4dbb69b720741ecbdc7655d3557';
 
-export const getImages = async (query, page) => {
-  const { data } = await axios.get(`?key=${key}&q=${query}&page=${page}`);
-  //   console.log('data =', data.hits);
-  return data;
-};
+export async function getTrendMovies() {
+  return await axios.get(`trending/movie/day?api_key=${apiKey}`);
+}
 
-// home https://api.themoviedb.org/3/trending/movie/day?api_key=6746b4dbb69b720741ecbdc7655d3557
+export async function getSeachMovies(queryWord) {
+  return await axios.get(`search/movie?api_key=${apiKey}&query=${queryWord}`);
+}
 
-// search query=King+Leon https://api.themoviedb.org/3/search/movie?api_key=6746b4dbb69b720741ecbdc7655d3557&query=King+Leon
-// query to film with id=343611 https://api.themoviedb.org/3/movie/343611?api_key=6746b4dbb69b720741ecbdc7655d3557
-// image in film_card = https://image.tmdb.org/t/p/original/zk4t5puCiXPvw2dwKBGUt4Hh977.jpg
+export async function getMovie(movieId) {
+  return await axios.get(`movie/${movieId}?api_key=${apiKey}`);
+}
 
-//cast with id=343611 https://api.themoviedb.org/3/movie/343611/credits?api_key=6746b4dbb69b720741ecbdc7655d3557
-//reviews with id=343611 https://api.themoviedb.org/3/movie/343611/reviews?api_key=6746b4dbb69b720741ecbdc7655d3557
+export async function getMovieInfo(movieId, subType) {
+  return await axios.get(`movie/${movieId}/${subType}?api_key=${apiKey}`);
+}
