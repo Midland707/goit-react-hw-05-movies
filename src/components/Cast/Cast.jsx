@@ -24,14 +24,14 @@ const Cast = () => {
     }
   }, [movieId]);
 
-  const imgURL = 'https://image.tmdb.org/t/p/original';
+  // const imgURL = 'https://image.tmdb.org/t/p/original';
   return (
     <div>
       {castsCard.length ? (
         <ul>
           {castsCard.map(cast => (
             <li key={cast.id}>
-              {cast.profile_path ? (
+              {/* {cast.profile_path ? (
                 <img
                   src={`${imgURL}${cast.profile_path}`}
                   alt={`${cast.original_name}`}
@@ -41,7 +41,7 @@ const Cast = () => {
                   src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
                   alt="no image"
                 />
-              )}
+              )} */}
               <span>{cast.original_name}</span>
               <span>Character {cast.character}</span>
             </li>

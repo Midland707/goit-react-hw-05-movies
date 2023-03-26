@@ -1,7 +1,23 @@
 import axios from 'axios';
 import { Suspense, useState, useRef, useEffect } from 'react';
-import { useLocation, NavLink, Outlet, useParams } from 'react-router-dom';
+import { useLocation, Outlet, useParams } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
+import {
+  MovieDetailsWrap,
+  MovieDetailsGoBack,
+  MovieCard,
+  MovieCardImg,
+  MovieCardDesc,
+  MovieCardDescTitle,
+  MovieCardDescOverview,
+  MovieCardDescGenres,
+  MovieCardDescText,
+  MovieCardInfo,
+  MovieCardInfoTitle,
+  MovieCardNavMenu,
+  MovieCardNavMenuItem,
+  MovieCardNavLink,
+} from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const location = useLocation();
@@ -38,26 +54,52 @@ const MovieDetails = () => {
     }
   };
   return (
-    <div>
-      <NavLink to={backLinkRef.current}>Back to Home</NavLink>
+    <MovieDetailsWrap>
+      <MovieDetailsGoBack to={backLinkRef.current}>Go back</MovieDetailsGoBack>
       {dataCard && (
-        <div>
-          <img src={`${imgURL}${dataCard.poster_path}`} alt="" />
-          <span>{dataCard.original_title}</span>
-          <span>User Score : {dataCard.popularity}</span>
-          <span>Overview {dataCard.overview}</span>
-          <span>Genres {getGenres()}</span>
-        </div>
+        <MovieCard>
+          {dataCard.poster_path ? (
+            <MovieCardImg src={`${imgURL}${dataCard.poster_path}`} alt="" />
+          ) : (
+            <MovieCardImg
+              src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
+              alt="no image"
+            />
+          )}
+          <MovieCardDesc>
+            <MovieCardDescTitle>
+              {dataCard.original_title}
+              {` (${dataCard.release_date.slice(0, 4)})`}
+            </MovieCardDescTitle>
+            <MovieCardDescText>
+              User Score : {dataCard.vote_average * 10} %
+            </MovieCardDescText>
+            <MovieCardDescOverview>
+              Overview
+              <MovieCardDescText>{dataCard.overview}</MovieCardDescText>
+            </MovieCardDescOverview>
+            <MovieCardDescGenres>
+              Genres
+              <MovieCardDescText>{getGenres()}</MovieCardDescText>
+            </MovieCardDescGenres>
+          </MovieCardDesc>
+        </MovieCard>
       )}
-      <span>Aditional information</span>
-      <ul>
-        <li>
-          <NavLink to={`/movies/${movieId}/cast`}>Cast</NavLink>
-        </li>
-        <li>
-          <NavLink to={`/movies/${movieId}/reviews`}>Reviews</NavLink>
-        </li>
-      </ul>
+      <MovieCardInfo>
+        <MovieCardInfoTitle>Aditional information</MovieCardInfoTitle>
+        <MovieCardNavMenu>
+          <MovieCardNavMenuItem>
+            <MovieCardNavLink to={`/movies/${movieId}/cast`}>
+              Cast
+            </MovieCardNavLink>
+          </MovieCardNavMenuItem>
+          <MovieCardNavMenuItem>
+            <MovieCardNavLink to={`/movies/${movieId}/reviews`}>
+              Reviews
+            </MovieCardNavLink>
+          </MovieCardNavMenuItem>
+        </MovieCardNavMenu>
+      </MovieCardInfo>
       <Suspense
         fallback={
           <div>
@@ -68,7 +110,7 @@ const MovieDetails = () => {
       >
         <Outlet />
       </Suspense>
-    </div>
+    </MovieDetailsWrap>
   );
 };
 
