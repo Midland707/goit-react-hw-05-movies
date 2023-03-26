@@ -1,6 +1,14 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import {
+  MoviesReviewsWrap,
+  MovieReviewsList,
+  MovieReviewsItem,
+  MovieReviewAutor,
+  MovieReviewReview,
+  MovieReviewEmpty,
+} from './Reviews.styled';
 
 const Reviews = () => {
   const [reviewsCard, setReviewsCard] = useState([]);
@@ -25,20 +33,22 @@ const Reviews = () => {
   }, [movieId]);
 
   return (
-    <div>
+    <MoviesReviewsWrap>
       {reviewsCard.length ? (
-        <ul>
+        <MovieReviewsList>
           {reviewsCard.map(review => (
-            <li key={review.id}>
-              <span>Autor{review.author}</span>
-              <span>Character {review.content}</span>
-            </li>
+            <MovieReviewsItem key={review.id}>
+              <MovieReviewAutor>Autor : {review.author}</MovieReviewAutor>
+              <MovieReviewReview>{review.content}</MovieReviewReview>
+            </MovieReviewsItem>
           ))}
-        </ul>
+        </MovieReviewsList>
       ) : (
-        <span>We don't have any reviews for this movie</span>
+        <MovieReviewEmpty>
+          We don't have any reviews for this movie
+        </MovieReviewEmpty>
       )}
-    </div>
+    </MoviesReviewsWrap>
   );
 };
 

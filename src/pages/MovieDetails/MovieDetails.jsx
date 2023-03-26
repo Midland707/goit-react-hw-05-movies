@@ -72,7 +72,7 @@ const MovieDetails = () => {
               {` (${dataCard.release_date.slice(0, 4)})`}
             </MovieCardDescTitle>
             <MovieCardDescText>
-              User Score : {dataCard.vote_average * 10} %
+              User Score : {(dataCard.vote_average * 10).toFixed(0)} %
             </MovieCardDescText>
             <MovieCardDescOverview>
               Overview

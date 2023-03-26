@@ -32,3 +32,6 @@ export const MovieCastTitle = styled.div`
 `;
 export const MovieCastName = styled.h2``;
 export const MovieCastChar = styled.p``;
+export const MovieCastEmpty = styled.h3`
+  color: red;
+`;

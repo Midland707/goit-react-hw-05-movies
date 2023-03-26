@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 export const MovieDetailsWrap = styled.div``;
 
 export const MovieDetailsGoBack = styled(Link)`
+  background-color: lightgrey;
   display: block;
   width: 100px;
   cursor: pointer;
@@ -66,6 +67,7 @@ export const MovieCardNavMenu = styled.ul`
   gap: 20px;
 `;
 export const MovieCardNavMenuItem = styled.li`
+  background-color: lightgrey;
   width: 100px;
   cursor: pointer;
   border: 1px solid black;

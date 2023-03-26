@@ -9,6 +9,7 @@ import {
   MovieCastTitle,
   MovieCastName,
   MovieCastChar,
+  MovieCastEmpty,
 } from './Cast.styled';
 
 const Cast = () => {
@@ -42,7 +43,7 @@ const Cast = () => {
             <MovieCastItem key={cast.id}>
               <MovieCastTitle>
                 <MovieCastName>{cast.original_name}</MovieCastName>
-                <MovieCastChar>Character {cast.character}</MovieCastChar>
+                <MovieCastChar>Character : {cast.character}</MovieCastChar>
               </MovieCastTitle>
               {cast.profile_path ? (
                 <MovieCastImg
@@ -59,7 +60,7 @@ const Cast = () => {
           ))}
         </MovieCastList>
       ) : (
-        <span>We don't have any cast for this movie</span>
+        <MovieCastEmpty>We don't have any cast for this movie</MovieCastEmpty>
       )}
     </MovieCastWrap>
   );
