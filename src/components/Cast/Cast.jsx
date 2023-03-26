@@ -1,6 +1,15 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import {
+  MovieCastWrap,
+  MovieCastList,
+  MovieCastItem,
+  MovieCastImg,
+  MovieCastTitle,
+  MovieCastName,
+  MovieCastChar,
+} from './Cast.styled';
 
 const Cast = () => {
   const [castsCard, setCastsCard] = useState([]);
@@ -24,33 +33,35 @@ const Cast = () => {
     }
   }, [movieId]);
 
-  // const imgURL = 'https://image.tmdb.org/t/p/original';
+  const imgURL = 'https://image.tmdb.org/t/p/original';
   return (
-    <div>
+    <MovieCastWrap>
       {castsCard.length ? (
-        <ul>
+        <MovieCastList>
           {castsCard.map(cast => (
-            <li key={cast.id}>
-              {/* {cast.profile_path ? (
-                <img
+            <MovieCastItem key={cast.id}>
+              <MovieCastTitle>
+                <MovieCastName>{cast.original_name}</MovieCastName>
+                <MovieCastChar>Character {cast.character}</MovieCastChar>
+              </MovieCastTitle>
+              {cast.profile_path ? (
+                <MovieCastImg
                   src={`${imgURL}${cast.profile_path}`}
                   alt={`${cast.original_name}`}
                 />
               ) : (
-                <img
+                <MovieCastImg
                   src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
                   alt="no image"
                 />
-              )} */}
-              <span>{cast.original_name}</span>
-              <span>Character {cast.character}</span>
-            </li>
+              )}
+            </MovieCastItem>
           ))}
-        </ul>
+        </MovieCastList>
       ) : (
         <span>We don't have any cast for this movie</span>
       )}
-    </div>
+    </MovieCastWrap>
   );
 };
 

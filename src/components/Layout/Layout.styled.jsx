@@ -39,6 +39,6 @@ export const StyledNavLink = styled(NavLink)`
   }
   &:hover,
   &:focus {
-    color: green;
+    color: blue;
   }
 `;

@@ -16,7 +16,7 @@ export const MovieDetailsGoBack = styled(Link)`
 
   &:hover,
   &:focus {
-    color: green;
+    color: blue;
   }
 `;
 
@@ -84,6 +84,6 @@ export const MovieCardNavLink = styled(NavLink)`
   }
   &:hover,
   &:focus {
-    color: green;
+    color: blue;
   }
 `;
